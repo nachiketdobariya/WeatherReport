@@ -2,9 +2,22 @@
 import { fetchWeatherData } from '@/hooks/fetchWeatherData';
 import { useState } from 'react';
 
+type WeatherData = {
+	name: string; // City name
+	sys: {
+		country: string; // Country code
+	};
+	main: {
+		temp: number; // Temperature in Kelvin
+	};
+	weather: {
+		description: string; // Weather condition description
+	}[];
+};
+
 export default function Home() {
 	const [city, setCity] = useState('');
-	const [weather, setWeather] = useState<any>(null);
+	const [weather, setWeather] = useState<WeatherData | null>(null);
 	const [error, setError] = useState('');
 
 	const handleSearch = async () => {
