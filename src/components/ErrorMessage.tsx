@@ -5,7 +5,7 @@ type ErrorMessageProps = {
 };
 
 const ErrorMessage = ({ message }: ErrorMessageProps) => {
-	return <p className="text-red-500 mt-2">{message}</p>;
+	return message && <p className="text-red-500 mt-2">{message}</p>;
 };
 
 export default ErrorMessage;
