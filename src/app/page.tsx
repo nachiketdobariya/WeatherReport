@@ -1,69 +1,26 @@
 'use client';
-import { fetchWeatherData } from '@/hooks/fetchWeatherData';
-import { useState } from 'react';
-
-type WeatherData = {
-	name: string; // City name
-	sys: {
-		country: string; // Country code
-	};
-	main: {
-		temp: number; // Temperature in Kelvin
-	};
-	weather: {
-		description: string; // Weather condition description
-	}[];
-};
+import ErrorMessage from '@/components/ErrorMessage';
+import SearchInput from '@/components/SearchInput';
+import WeatherData from '@/components/WeatherData';
+import { useWeather } from '@/hooks/useWeather';
 
 export default function Home() {
-	const [city, setCity] = useState('');
-	const [weather, setWeather] = useState<WeatherData | null>(null);
-	const [error, setError] = useState('');
-
-	const handleSearch = async () => {
-		try {
-			setError('');
-			const data = await fetchWeatherData(city);
-			setWeather(data);
-		} catch (err) {
-			setError('Could not fetch weather data. Please try again.');
-		}
-	};
+	const { city, setCity, error, weatherData, handleSearch } = useWeather();
 
 	return (
-		<div className="items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+		<div className="items-center justify-items-center min-h-screen p-8 sm:p-20">
+			<main className="flex flex-col gap-8 items-center">
 				<h1>Weather Report</h1>
 
-				<div className="mt-4">
-					<input
-						type="text"
-						value={city}
-						onChange={(e) => setCity(e.target.value)}
-						placeholder="Enter city name"
-						className="border p-2 rounded"
-					/>
-					<button
-						onClick={handleSearch}
-						className="bg-blue-500 text-white p-2 rounded ml-2"
-					>
-						Search
-					</button>
-				</div>
+				<SearchInput
+					city={city}
+					setCity={setCity}
+					handleSearch={handleSearch}
+				/>
 
-				{error && <p className="text-red-500 mt-2">{error}</p>}
+				{error && <ErrorMessage message={error} />}
 
-				{weather && (
-					<div className="mt-4">
-						<h2 className="text-xl font-semibold">
-							Weather in {weather.name}, {weather.sys.country}
-						</h2>
-						<p>Temperature: {(weather.main.temp - 273.15).toFixed(2)}°C</p>
-						<p className="capitalize">
-							Condition: {weather.weather[0].description}
-						</p>
-					</div>
-				)}
+				{weatherData && <WeatherData data={weatherData} />}
 			</main>
 		</div>
 	);
