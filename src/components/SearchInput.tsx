@@ -1,16 +1,12 @@
 import React from 'react';
 
-interface SearchInputProps {
+type SearchInputProps = {
 	city: string;
 	setCity: (city: string) => void;
 	handleSearch: () => void;
-}
+};
 
-const SearchInput: React.FC<SearchInputProps> = ({
-	city,
-	setCity,
-	handleSearch,
-}) => {
+const SearchInput = ({ city, setCity, handleSearch }: SearchInputProps) => {
 	return (
 		<div className="mt-4">
 			<input
