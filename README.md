@@ -38,7 +38,9 @@ To run the app locally, follow these steps:
 
 4. Create a `.env.local` file in the root directory and add your OpenWeather API key:
    ```
-   NEXT_PUBLIC_OPENWEATHER_API_KEY=your-api-key-here
+   NEXT_PUBLIC_API_BASE_URL=https://api.openweathermap.org/data/2.5
+   NEXT_PUBLIC_API_ICON_URL=https://openweathermap.org/img/wn
+   NEXT_PUBLIC_OPEN_WEATHER_API_KEY=your-api-key-here
    ```
 
 5. Run the development server:
