@@ -22,7 +22,13 @@ const WeatherData = ({ data }: WeatherDataProps) => {
 			<h2 className="text-xl font-semibold">
 				Weather in {name}, {sys.country}
 			</h2>
-			<Image src={queryURL} alt={description} loading="lazy" />
+			<Image
+				width={64}
+				height={64}
+				src={queryURL}
+				alt={description}
+				loading="lazy"
+			/>
 			<p>Temperature: {(main.temp - 273.15).toFixed(2)}°C</p>
 			<p className="capitalize">Condition: {weather[0].description}</p>
 		</div>

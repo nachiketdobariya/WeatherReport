@@ -43,6 +43,8 @@ const WeatherTable = ({ weatherHistory }: WeatherTableProps) => {
 							<td>
 								<Image
 									src={queryURL}
+									width={48}
+									height={48}
 									alt={weather[0].description}
 									loading="lazy"
 								/>
