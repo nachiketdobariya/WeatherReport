@@ -19,6 +19,7 @@ export const useWeather = () => {
 				localStorage.setItem('WeatherHistory', JSON.stringify(updatedHistory));
 				return updatedHistory;
 			});
+			setCity('');
 		} catch (err) {
 			setError('Could not fetch weather data. Please try again.');
 		}
